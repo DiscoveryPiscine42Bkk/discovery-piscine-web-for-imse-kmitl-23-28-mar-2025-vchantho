@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Balloon</title>
+    <style>
+        #balloon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%; /*ทำให้Balloonโค้งมนเป็นวงกลม*/
+            background-color: red;
+            margin: 200px auto;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="balloon"></div>
+
+    <script>
+      $(document).ready(function() {
+          var colorsIncrease = ["red", "green", "blue"];
+          var colorsDecrease = ["blue", "green", "red"];
+          var colorIndexIncrease = 0;
+          var colorIndexDecrease = 0;
+
+          $("#balloon").click(function() {
+              var $balloon = $(this);
+              var width = parseInt($balloon.css("width")) + 10;
+              var height = parseInt($balloon.css("height")) + 10;
+
+              if (width >= 420) {
+                  $balloon.css({
+                      "width": "200px",
+                      "height": "200px"
+                  });
+                   colorIndexIncrease = (colorIndexIncrease + 1) % colorsIncrease.length;
+                   $balloon.css("background-color", colorsIncrease[colorIndexIncrease]);
+              } else {
+                  $balloon.css({
+                      "width": width + "px",
+                      "height": height + "px"
+                  });
+                   colorIndexIncrease = (colorIndexIncrease + 1) % colorsIncrease.length;
+                   $balloon.css("background-color", colorsIncrease[colorIndexIncrease]);
+              }
+          });
+
+          $("#balloon").mouseleave(function() {
+              var $balloon = $(this);
+              var width = parseInt($balloon.css("width")) - 5;
+              var height = parseInt($balloon.css("height")) - 5;
+
+              if (width <= 200) {
+                  $balloon.css({
+                      "width": "200px",
+                      "height": "200px"
+                  });
+              } else {
+                  $balloon.css({
+                      "width": width + "px",
+                      "height": height + "px"
+                  });
+                  colorIndexDecrease = (colorIndexDecrease + 1) % colorsDecrease.length;
+                  $balloon.css("background-color", colorsIncrease[colorIndexIncrease]);
+              }
+          });
+      });
+  </script>
+</body>
+</html>
