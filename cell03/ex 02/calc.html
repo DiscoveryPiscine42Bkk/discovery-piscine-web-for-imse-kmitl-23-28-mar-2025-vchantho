@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #ff0080;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4bdff;
+        }
+        input[type="submit"] {
+            background-color: rgb(255, 255, 255);
+            color: rgb(255, 0, 115);
+            padding: 10px 10px;
+        }
+</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <input type="text" id="Num1">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+    <input type="text" id="Num2">
+    <input type="submit" value="Try me!" id="calculateButton">
+
+    <script>
+        $(document).ready(function() {
+            $("#calculateButton").click(function() {
+                var Num1 = parseInt($("#Num1").val()); //ดึงค่าNum1มาเป็นจำนวนเต็ม//
+                var operator = $("#operator").val(); //ดึงเครื่องหมาย//
+                var Num2 = parseInt($("#Num2").val());
+
+                if (isNaN(Num1) || isNaN(Num2) || Num1 < 0 || Num2 < 0) {
+                    //NaN = Not a Number//
+                    // || หมายความว่าถ้าเงื่อนไขใดเงื่อนไขหนึ่งเป็นจริง ทั้งหมดในเงื่อนไขนี้จะเป็นจริง //
+                    alert("Error :("); //เเสดงข้อความเเจ้งเตือน//
+                    return; //หยุดการทำงาน//
+                }
+
+                var result;
+
+                switch (operator) {
+                    case "+":
+                        result = Num1 + Num2;
+                        break;
+                    case "-":
+                        result = Num1 - Num2;
+                        break;
+                    case "*":
+                        result = Num1 * Num2;
+                        break;
+                    case "/":
+                        if (Num2 === 0) {
+                            alert("It's over 9000!");
+                            console.log("It's over 9000!");
+                            return;
+                        }
+                        result = Num1 / Num2;
+                        break;
+                    case "%":
+                        if (Num2 === 0) {
+                            alert("It's over 9000!");
+                            console.log("It's over 9000!");
+                            return;
+                        }
+                        result = Num1 % Num2;
+                        break;
+                    default:
+                        alert("Invalid operator");
+                        console.log("Invalid operator");
+                        return;
+                }
+
+                alert("Result: " + result);
+                console.log("Result: " + result);
+            });
+
+            setInterval(function() {
+                alert("Please, use me...");
+            }, 30000); // 30000 milliseconds = 30 seconds
+        });
+    </script>
+</body>
+</html>
